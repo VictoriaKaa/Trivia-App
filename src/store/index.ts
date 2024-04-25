@@ -1,9 +1,9 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
-import dataReducer from "./features/data";
+import triviaReducer from "./features/triviaData";
 
 export const store = configureStore({
   reducer: {
-    data: dataReducer
+    trivia: triviaReducer,
   }
 });
 

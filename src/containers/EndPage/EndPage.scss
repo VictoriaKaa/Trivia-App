@@ -1,0 +1,23 @@
+.endpage {
+    &-container {
+        width: 600px;
+    }
+
+    &-title {
+        padding: 20px;
+        font-size: 20px;
+        font-weight: 700;
+        font-family: "Raleway", sans-serif;
+    }
+
+    &-result {
+        font-size: 30px;
+        color: crimson;
+    }
+
+    &-btns {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+}
