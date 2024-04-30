@@ -1,7 +1,11 @@
 import { getCookie, setCookie } from 'cookies-next';
 import { Buffer } from 'buffer';
 
-export const setTriviaCookie = (token: string, name: string) => {
+interface TokenObj {
+  token: string | undefined;
+}
+
+export const setTriviaCookie = (token: string, name: string): void => {
   const toBase64 = Buffer.from(token).toString('base64');
 
   setCookie(name, toBase64, {
@@ -10,7 +14,7 @@ export const setTriviaCookie = (token: string, name: string) => {
   });
 };
 
-const getTokenCookie = (name: string) => {
+const getTokenCookie = (name: string): string | undefined => {
   const cookie = getCookie(name);
 
   if (!cookie) return undefined;
@@ -18,7 +22,7 @@ const getTokenCookie = (name: string) => {
   return Buffer.from(cookie, 'base64').toString('ascii');
 };
 
-export const getValidTokens = () => {
+export const getValidTokens = (): TokenObj => {
   const token = getTokenCookie('trivia_token');
   return {
     token: token,

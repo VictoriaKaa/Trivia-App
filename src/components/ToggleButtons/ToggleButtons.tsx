@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { TriviaMode } from "../../store/features/triviaData";
 
 interface ToggleButtonsProps {
-  mode: any;
+  mode: TriviaMode;
   modeName: string;
-  types: any[];
+  types: string[];
   handleClick: (modeName: string, item: string) => void
 }
 
@@ -17,7 +18,7 @@ const ToggleButtons = ({ mode, modeName, types, handleClick }: ToggleButtonsProp
   }
 
   useEffect(() => {
-    setModeType(mode[modeName]);
+    setModeType((mode as any)[modeName]);
   }, [mode])
 
   return <ToggleButtonGroup

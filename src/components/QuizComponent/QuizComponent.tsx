@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../utils/hooks";
 import { useNavigate } from "react-router-dom";
 import QuestionComponent from "../QuestionComponent/QuestionComponent";
-import { setFinalScore } from "../../store/features/triviaData";
+import { Question, setFinalScore } from "../../store/features/triviaData";
 
 
 interface QuizComponentProps {
-    questions: any[];
+    questions: Question[];
 }
 
 const QuizComponent = ({ questions }: QuizComponentProps) => {

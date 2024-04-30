@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 import "./SettingsComponent.scss";
 import { useNavigate } from "react-router-dom";
 import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { Category } from "../../store/features/triviaData";
+import { Category, TriviaMode } from "../../store/features/triviaData";
 import ToggleButtons from "../ToggleButtons/ToggleButtons";
 
 interface SettingsComponentProps {
-  mode: any;
+  mode: TriviaMode;
   categories: Category[];
-  dispatchMode: (a: any, b: any) => void;
+  dispatchMode: (category: string, item: string | number) => void;
 }
 
 const SettingsComponent = ({ mode, categories, dispatchMode }: SettingsComponentProps) => {
   const navigate = useNavigate();
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState(0);
 
   useEffect(() => {
     setCategory(mode.category);
@@ -24,7 +24,7 @@ const SettingsComponent = ({ mode, categories, dispatchMode }: SettingsComponent
   }
 
   const selectCategory = (event: SelectChangeEvent): void => {
-    const newCategory = event.target.value;
+    const newCategory = +event.target.value;
     dispatchMode('category', newCategory)
     setCategory(newCategory);
   }
@@ -35,7 +35,7 @@ const SettingsComponent = ({ mode, categories, dispatchMode }: SettingsComponent
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
-        value={category}
+        value={category.toString()}
         label="Select Category"
         onChange={selectCategory}
       >
@@ -45,7 +45,7 @@ const SettingsComponent = ({ mode, categories, dispatchMode }: SettingsComponent
     </FormControl>
   }
 
-  const navigateToGame = () => {
+  const navigateToGame = (): void => {
     navigate('/game');
   }
 

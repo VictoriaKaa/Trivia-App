@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import "./QuestionComponent.scss";
 import { Button } from "@mui/material";
 import { convChar } from "../../utils/charConvertation";
+import { Question } from "../../store/features/triviaData";
 
 
 interface QuestionComponentProps {
-    question: any;
-    goToNextQuestion: (val: any) => void;
+    question: Question;
+    goToNextQuestion: () => void;
     addScore: () => void;
 }
 
 const QuestionComponent = ({ question, goToNextQuestion, addScore }: QuestionComponentProps) => {
-    const [answers, setAnswers] = useState<any>([]);
+    const [answers, setAnswers] = useState<string[]>([]);
     const [isCorrect, setIsCorrect] = useState<boolean>(false);
     const [isAnswer, setIsAnswer] = useState<boolean>(false);
 
@@ -40,7 +41,11 @@ const QuestionComponent = ({ question, goToNextQuestion, addScore }: QuestionCom
                     </>}
                 {question.type === 'multiple' &&
                     <>
-                        {answers.map((item: any) => <Button variant="contained" size='large' color='warning' disabled={isAnswer} key={item} onClick={() => getAnswer(item)}>{convChar(item)}</Button>)}
+                        {answers.map((item: string) =>
+                            <Button variant="contained" size='large' color='warning'
+                                disabled={isAnswer} key={item} onClick={() => getAnswer(item)}>
+                                {convChar(item)}
+                            </Button>)}
                     </>}
             </div>
             {isAnswer && <div className="question-next">

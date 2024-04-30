@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "./EndPage.scss";
 import { RootState } from "../../store";

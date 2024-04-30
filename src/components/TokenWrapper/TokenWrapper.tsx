@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import { ComponentType, useEffect } from 'react';
 import { getTriviaToken, setTriviaToken } from '../../store/features/triviaData';
 import { useAppDispatch } from '../../utils/hooks';
 import { getValidTokens } from '../../utils/cookies';
 
 
-const withToken = (WrappedComponent: any) => {
-    const WithToken = (props: any) => {
+function withToken<TProps extends object> (WrappedComponent: ComponentType<TProps>) {
+    const WithToken = (props: TProps) => {
         const dispatch = useAppDispatch();
 
         const { token } = getValidTokens();

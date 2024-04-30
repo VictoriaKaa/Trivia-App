@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchTriviaCategories, fetchTriviaQuestions, fetchTriviaToken } from "./triviaDataAPI";
 import { setTriviaCookie } from "../../utils/cookies";
+import { RootState } from "..";
 
 
 export interface Category {
@@ -36,7 +37,7 @@ export interface TriviaDataState {
 const initialDataState: TriviaDataState = {
     token: '',
     questions: [] as Question[],
-    mode: { category: 0, type: 'boolean', difficulty: 'easy' },
+    mode: { category: 0, type: 'any', difficulty: 'any' },
     categories: [],
     score: 0,
     loading: false,
@@ -129,8 +130,8 @@ export const getTriviaToken = createAsyncThunk(
 export const getTriviaQuestions = createAsyncThunk(
     'data/fetchTriviaQuestions',
     async (val: string, { getState }) => {
-        const mode = (getState() as any).trivia.mode;
-        const token = (getState() as any).trivia.token;
+        const mode = (getState() as RootState).trivia.mode;
+        const token = (getState() as RootState).trivia.token;
         const response = await fetchTriviaQuestions(mode, token);
         return response.data;
     }
